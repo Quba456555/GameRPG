@@ -1,4 +1,4 @@
-import time     # wywołanie modułu z funkcjami do obłsugi czasu, np. time.sleep(0.3) 
+import time     # wywołanie modułu z funkcjami do obłsugi czasu, np. time.sleep(1) 
 import msvcrt   # wywołanie modułu Microsoft Visual C Runtime z funkcjami do obłsugi klawiszy, np. msvcrt.getch()  
 import random 
                                    
@@ -18,7 +18,7 @@ def kasyno(zloto):
         print("(1) Graj")
         print("(2) Zakończ")
 
-        wybor = msvcrt.getch() #pobiera nacisnięty klawisz 
+        wybor = msvcrt.getch().decode('utf-8') #pobiera nacisnięty klawisz i przeksztaca go na tekst    
 
         if wybor == "1":
             zmiana_zlota = random.randint(-10, 10)
@@ -43,7 +43,7 @@ def spotkanie():
         msvcrt.getch()
         dodaj_many = random.randint(10, 50)
         print(f"Twoja mana wynosi teraz {dodaj_many}. Czy szukasz kolejnego spotkania? (Naciśnij 't' aby losować ponownie)")
-        wybor = msvcrt.getch()  # pobiera klawsz
+        wybor = msvcrt.getch().decode('utf-8')  # pobiera klawsz i zamienia go na tekst
         if wybor == 't':
             continue  # Ponowne losowanie
         else:
@@ -151,10 +151,10 @@ def walka_z_bossem2(nowa_mana):
     zycie_gracza = 100
     
     print("\nFinałowa walka z potężnym bossem!\n")
-    time.sleep(2)
+    time.sleep(1)
     
     while zycie_bossa > 0 and nowa_mana >= 10 and zycie_gracza > 0:
-        time.sleep(2)
+        time.sleep(1)
         print(f"Aktualne życie bossa: {zycie_bossa}")
         print(f"Aktualne życie gracza: {zycie_gracza}")
         print(f"Aktualna ilość many gracza: {nowa_mana}\n")
@@ -207,8 +207,10 @@ def walka_z_bossem2(nowa_mana):
 
     if zycie_bossa <= 0:
         print("Brawo! Pokonałeś potężnego bossa!")
+        time.sleep(1)
     elif zycie_gracza <= 0:
         print("Przegrałeś walkę z bossem. Twoje życie spadło poniżej zera.")
+        time.sleep(1)
 
 def skarbiec():
     print("Udało Ci się znaleźć skarbies bossa z maną.\nZgadnij liczbę aby go otworzyć!")
@@ -231,6 +233,7 @@ def skarbiec():
             print(f"Brawo! Odgadłeś tę liczbę {liczba_do_odgadniecia} i otworzyłeś skarbiec!")
             print(f"Zajęło Ci to {liczba_prob} prób.")
             print("Zgarniasz kwantylion many!")
+            time.sleep(1)
             break
 
 def logika_gry():
@@ -287,6 +290,7 @@ def logika_gry():
     print(f"Wchodzisz do sklepu, możesz kupć many do walki z bossem. Teraz mana {mana}, złoto {zloto}.\n")
     zloto, mana = sklep(zloto, mana)
     print(f"Twoja mana wynosi teraz {mana}, a złoto {zloto}.\n")
+    time.sleep(1)
 
     walka_z_bossem(mana)
 
@@ -299,7 +303,7 @@ def logika_gry():
     walka_z_bossem2(nowa_mana)
 
     skarbiec()
-    print("GAME OVER!")
+    print("\nGAME OVER!")
     print("Mam nadzieję, że gra Ci się podobała :-)")
 
 logika_gry()
