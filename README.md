@@ -210,6 +210,29 @@ def walka_z_bossem2(nowa_mana):
     elif zycie_gracza <= 0:
         print("Przegrałeś walkę z bossem. Twoje życie spadło poniżej zera.")
 
+def skarbiec():
+    print("Udało Ci się znaleźć skarbies bossa z maną.\nZgadnij liczbę aby go otworzyć!")
+    liczba_do_odgadniecia = random.randint(1, 10)
+    liczba_prob = 0
+    zakres_dolny = 1
+    zakres_gorny = 10
+
+    while True:
+        strzal = int(input(f"Zgadnij liczbę (od {zakres_dolny} do {zakres_gorny}): "))
+        liczba_prob += 1
+
+        if strzal < liczba_do_odgadniecia:
+            print("Za mało! Spróbuj ponownie.")
+            zakres_dolny = strzal + 1
+        elif strzal > liczba_do_odgadniecia:
+            print("Za dużo! Spróbuj ponownie.")
+            zakres_gorny = strzal - 1
+        else:
+            print(f"Brawo! Odgadłeś tę liczbę {liczba_do_odgadniecia} i otworzyłeś skarbiec!")
+            print(f"Zajęło Ci to {liczba_prob} prób.")
+            print("Zgarniasz kwantylion many!")
+            break
+
 def logika_gry():
           
     poziom = 1
@@ -274,5 +297,9 @@ def logika_gry():
     time.sleep(1)
 
     walka_z_bossem2(nowa_mana)
+
+    skarbiec()
+    print("GAME OVER!")
+    print("Mam nadzieję, że gra Ci się podobała :-)")
 
 logika_gry()
