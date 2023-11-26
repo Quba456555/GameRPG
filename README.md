@@ -16,9 +16,7 @@ def zatrzymaj():
 def kasyno(zloto):
     while True:
         print("Kasyno. Co chcesz zrobić?")
-         time.sleep(0.1)
         print("(1) Graj")
-         time.sleep(0.1)
         print("(2) Zakończ")
 
         if wybor == "1":
@@ -215,7 +213,6 @@ def walka_z_bossem2(nowa_mana):
     if zycie_bossa <= 0:
         print("Brawo! Pokonałeś potężnego bossa!")
     elif zycie_gracza <= 0:
-     time.sleep(0.1)
         print("Przegrałeś walkę z bossem. Twoje życie spadło poniżej zera.")
 
 def logika_gry():
@@ -258,7 +255,7 @@ def logika_gry():
             print("Wygrałeś wszystkie walki!\n")
 
     print(f"Masz teraz {zloto} sztuk złota. Idziesz do kasyna")
-     time.sleep(0.1)
+    time.sleep(0.1)
     zloto = kasyno(50)
     print(f"Masz teraz {zloto} sztuk złota.\n")
 
@@ -281,9 +278,3 @@ def logika_gry():
     walka_z_bossem2(nowa_mana)
 
 logika_gry()
- time.sleep(0.1)
-  time.sleep(0.1)
-   time.sleep(0.1)
-    time.sleep(0.1)
-     time.sleep(0.1)
-      time.sleep(0.1)
