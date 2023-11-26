@@ -31,6 +31,7 @@ def kasyno(zloto):
             break
         else:
             print("Nieprawidłowy wybór. Wybierz 1 lub 2.")
+            time.sleep(0.1)
 
     return zloto
 
@@ -40,6 +41,7 @@ def spotkanie():
         msvcrt.getch()
         dodaj_many = random.randint(10, 50)
         print(f"Twoja mana wynosi teraz {dodaj_many}. Czy szukasz kolejnego spotkania? (Naciśnij 't' aby losować ponownie)")
+        time.sleep(0.1)
         wybor = msvcrt.getch()  # Konwertuj do małych liter dla jednolitości
         if wybor == 't':
             continue  # Ponowne losowanie
@@ -63,10 +65,12 @@ def losuj_przeciwnika(poziom):
 def wybierz_taktyke():
     while True:
         print("Wybierz taktykę:\n(1) Atak frontalny\n(2) Atak z flanki\n(3) Ataki z ukrycia\n")
+        time.sleep(0.1)
         wybor_taktyki = input("Twój wybór: ")
         if 1 <= int(wybor_taktyki) <= 3:
             break
         print("Podaj liczbę z zakresu 1-3.")
+        time.sleep(0.1)
     return int(wybor_taktyki)
 
 def walka(taktyka_gracza, przeciwnik):
@@ -99,10 +103,12 @@ def sklep(zloto, mana):
         mana += ilosc_many
         zloto -= cena
         print(f"Kupiłeś {ilosc_many} many za {cena} złota.")
+        time.sleep(0.1)
     return zloto, mana
 
 def walka_z_bossem(mana):
     print("Walczysz z bossem 1!")
+    time.sleep(0.1)
 
     zycie_bossa = 60
     strzal_min = 10
@@ -110,7 +116,9 @@ def walka_z_bossem(mana):
 
     while mana >= 0:
         print(f"\nAktualne życie bossa 1: {zycie_bossa}")
+        time.sleep(0.1)
         print(f"Aktualna ilość many: {mana}")
+        time.sleep(0.1)
         input("Naciśnij enter, aby strzelić...\n")
 
         strzal = random.randint(strzal_min, strzal_max)
