@@ -1,4 +1,3 @@
-# GameRPG
 import time     # wywołanie modułu z funkcjami do obłsugi czasu, np. time.sleep(0.3) 
 import msvcrt   # wywołanie modułu Microsoft Visual C Runtime z funkcjami do obłsugi klawiszy, np. msvcrt.getch()  
 import random 
@@ -11,7 +10,7 @@ def zatrzymaj():
             print(i)
             time.sleep(0.1)
             if msvcrt.kbhit():
-                return i    
+                return i
 
 def kasyno(zloto):
     while True:
@@ -19,30 +18,32 @@ def kasyno(zloto):
         print("(1) Graj")
         print("(2) Zakończ")
 
+        wybor = msvcrt.getch() #pobiera nacisnięty klawisz 
+
         if wybor == "1":
             zmiana_zlota = random.randint(-10, 10)
             zloto += zmiana_zlota
             if zmiana_zlota > 0:
                 print(f"\nWygrałeś {zmiana_zlota} sztuk złota. Masz teraz {zloto} złota\n")
+                time.sleep(1)
             else:
-                print(f"\nPrzegrałeś {zmiana_zlota} sztuk złota. Masz teraz {zloto} złota\n")
+                print(f"\nPrzegrałeś {abs(zmiana_zlota)} sztuk złota. Masz teraz {zloto} złota\n")
+                time.sleep(1)
         elif wybor == "2":
             print("Zakończono grę w kasynie.")
             break
         else:
             print("Nieprawidłowy wybór. Wybierz 1 lub 2.")
-            time.sleep(0.1)
 
     return zloto
 
 def spotkanie():
     while True:
-        print("Spotkanie z nieznaną postacią... Możesz zyskać manę od 10 do 50. Naciśnij klawisz")
+        print("Spotkanie z nieznaną postacią... Możesz zyskać manę. Naciśnij klawisz")
         msvcrt.getch()
         dodaj_many = random.randint(10, 50)
         print(f"Twoja mana wynosi teraz {dodaj_many}. Czy szukasz kolejnego spotkania? (Naciśnij 't' aby losować ponownie)")
-        time.sleep(0.1)
-        wybor = msvcrt.getch()  # Konwertuj do małych liter dla jednolitości
+        wybor = msvcrt.getch()  # pobiera klawsz
         if wybor == 't':
             continue  # Ponowne losowanie
         else:
@@ -65,17 +66,15 @@ def losuj_przeciwnika(poziom):
 def wybierz_taktyke():
     while True:
         print("Wybierz taktykę:\n(1) Atak frontalny\n(2) Atak z flanki\n(3) Ataki z ukrycia\n")
-        time.sleep(0.1)
         wybor_taktyki = input("Twój wybór: ")
-        if 1 <= int(wybor_taktyki) <= 3:
+        if wybor_taktyki.isdigit() and 1 <= int(wybor_taktyki) <= 3:
             break
         print("Podaj liczbę z zakresu 1-3.")
-        time.sleep(0.1)
     return int(wybor_taktyki)
 
 def walka(taktyka_gracza, przeciwnik):
     print(f"\nWalczyłeś z {przeciwnik}!")
-    wynik_walki = random.randint(1, 5) 
+    wynik_walki = random.randint(1, 6) 
     modifier = random.randint(-2, 2)
 
     if taktyka_gracza == 1:  # Atak frontalny
@@ -103,12 +102,10 @@ def sklep(zloto, mana):
         mana += ilosc_many
         zloto -= cena
         print(f"Kupiłeś {ilosc_many} many za {cena} złota.")
-        time.sleep(0.1)
     return zloto, mana
 
 def walka_z_bossem(mana):
     print("Walczysz z bossem 1!")
-    time.sleep(0.1)
 
     zycie_bossa = 60
     strzal_min = 10
@@ -116,9 +113,7 @@ def walka_z_bossem(mana):
 
     while mana >= 0:
         print(f"\nAktualne życie bossa 1: {zycie_bossa}")
-        time.sleep(0.1)
         print(f"Aktualna ilość many: {mana}")
-        time.sleep(0.1)
         input("Naciśnij enter, aby strzelić...\n")
 
         strzal = random.randint(strzal_min, strzal_max)
@@ -156,10 +151,10 @@ def walka_z_bossem2(nowa_mana):
     zycie_gracza = 100
     
     print("\nFinałowa walka z potężnym bossem!\n")
-    time.sleep(1)
+    time.sleep(2)
     
-    while zycie_bossa > 0 and nowa_mana >= 0 and zycie_gracza > 0:
-        time.sleep(1)
+    while zycie_bossa > 0 and nowa_mana >= 10 and zycie_gracza > 0:
+        time.sleep(2)
         print(f"Aktualne życie bossa: {zycie_bossa}")
         print(f"Aktualne życie gracza: {zycie_gracza}")
         print(f"Aktualna ilość many gracza: {nowa_mana}\n")
@@ -219,11 +214,12 @@ def logika_gry():
           
     poziom = 1
     wygrane_poziomy = 0
-    zdrowie = 10
+    zdrowie = 8
     zloto = 50
     mana = 0
 
     print("\nWygraj 5 poziomów aby przejść dalej!\n")
+    time.sleep(1)
 
     while wygrane_poziomy < 5:
         przeciwnik = losuj_przeciwnika(poziom)
@@ -231,15 +227,18 @@ def logika_gry():
         
         taktyka_gracza = wybierz_taktyke()
         wynik_walki = walka(taktyka_gracza, przeciwnik)
-        print(f"Walka wygrana gdy jej wynik większy od 5.\nWynik walki: {wynik_walki}")
+        print(f"Wynik walki: {wynik_walki}")
+        time.sleep(1)
 
         if wynik_walki >= 5:
                 wygrane_poziomy += 1
                 poziom += 1
-                zdrowie += 2
+                zdrowie += 3
                 if zdrowie > 10:
                     zdrowie = 10
-                print(f"Pokonałeś przeciwnika! Twoje zdrowie {zdrowie}. Wygrane poziomy {wygrane_poziomy}\n\n")
+                print(f"Pokonałeś przeciwnika! Twoje zdrowie {zdrowie}. Wygrane poziomy {wygrane_poziomy}\n")
+                time.sleep(1)
+               
         else:
             zdrowie -= 2
             wygrane_poziomy -= 1
@@ -255,7 +254,6 @@ def logika_gry():
             print("Wygrałeś wszystkie walki!\n")
 
     print(f"Masz teraz {zloto} sztuk złota. Idziesz do kasyna")
-    time.sleep(0.1)
     zloto = kasyno(50)
     print(f"Masz teraz {zloto} sztuk złota.\n")
 
@@ -263,7 +261,7 @@ def logika_gry():
     mana = spotkanie()
     print(f"Twoja mana wynosi teraz {mana}.\n")
     
-    print(f"Wchodzisz do sklepu, możesz dokupć many do walki z bossem. Teraz mana {mana}, złoto {zloto}.\n")
+    print(f"Wchodzisz do sklepu, możesz kupć many do walki z bossem. Teraz mana {mana}, złoto {zloto}.\n")
     zloto, mana = sklep(zloto, mana)
     print(f"Twoja mana wynosi teraz {mana}, a złoto {zloto}.\n")
 
