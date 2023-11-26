@@ -71,7 +71,7 @@ def wybierz_taktyke():
 
 def walka(taktyka_gracza, przeciwnik):
     print(f"\nWalczyłeś z {przeciwnik}!")
-    wynik_walki = random.randint(1, 5) #  1-4 tu fewentualnie od zera!!!!!!!!!!!!!!!!!!!!!!!!
+    wynik_walki = random.randint(1, 5) 
     modifier = random.randint(-2, 2)
 
     if taktyka_gracza == 1:  # Atak frontalny
